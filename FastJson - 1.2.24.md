@@ -56,6 +56,17 @@ dataSourceName值可控，存在JNDI注入：
 
 <img width="1055" alt="image" src="https://github.com/user-attachments/assets/8ed3d8b4-eb2e-49c3-94a7-4e46d62ab5f6" />
 
+## TemplatesImpl链：
+
+
+
+
+
+
+
+
+
+
 
 
 
