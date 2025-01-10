@@ -65,5 +65,10 @@ public class JSONUser {
 
 <img width="886" alt="image" src="https://github.com/user-attachments/assets/e4b654ae-84b2-4492-8853-ec9f1380c372" />
 
-<img src=../../../../../1 onerror=alert(1)>
+跟进 parseObject()方法：
 
+<img width="1040" alt="image" src="https://github.com/user-attachments/assets/00697679-34c7-4b24-a2b6-24aca49ee102" />
+
+obj是解析后的结果，
+
+继续跟进 parse()方法，
