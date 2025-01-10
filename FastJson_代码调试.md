@@ -1,4 +1,4 @@
-### 环境信息：
+<img width="1050" alt="image" src="https://github.com/user-attachments/assets/ca1a9899-4f7e-4ef2-8766-0e610504fe43" />### 环境信息：
 #### Fastjson - version : 1.2.24
 #### Java - version : 1.8.0_65
 
@@ -61,29 +61,29 @@ public class JSONUser {
 }
 ```
 
-在 parseObject()方法处打断点：
+1、在 parseObject()方法处打断点：
 
 <img width="886" alt="image" src="https://github.com/user-attachments/assets/e4b654ae-84b2-4492-8853-ec9f1380c372" />
 
-跟进 parseObject()方法：
+2、跟进 parseObject()方法：
 
 <img width="1040" alt="image" src="https://github.com/user-attachments/assets/00697679-34c7-4b24-a2b6-24aca49ee102" />
 
 obj是解析后的结果，然后返回。
 
-继续跟进 parse()方法：
+3、继续跟进 parse()方法：
 
 <img width="1023" alt="image" src="https://github.com/user-attachments/assets/d3b26d16-1a4e-43c0-8474-01293c473d8b" />
 
-继续跟进 这个 parse()方法中的 parse()方法：
+4、继续跟进 这个 parse()方法中的 parse()方法：
 
 <img width="1012" alt="image" src="https://github.com/user-attachments/assets/6278ecd3-dc73-4f6e-958f-0194190d0ae0" />
 
-使用 parser.parse()方法进行解析，并将解析结果赋值给 value之后返回，跟进 parser.parse()方法： (注：核心逻辑就在 parser.parse()方法中)
+5、使用 parser.parse()方法进行解析，并将解析结果赋值给 value之后返回，跟进 parser.parse()方法： (注：核心逻辑就在 parser.parse()方法中)
 
 <img width="1015" alt="image" src="https://github.com/user-attachments/assets/e15718f9-eb58-43e9-b0dd-63c9379d5c07" />
 
-parse()方法使用 switch来判断用户输入字符串的类型，case12为左大括号 '{'，由此判断输入为 JSON格式字符串，故创建 JSONObject对象进行解析，跟进 parseObejct()方法：
+6、parse()方法使用 switch来判断用户输入字符串的类型，case12为左大括号 '{'，由此判断输入为 JSON格式字符串，故创建 JSONObject对象进行解析，跟进 parseObejct()方法：
 
 <img width="955" alt="image" src="https://github.com/user-attachments/assets/78508a86-886e-4ef2-ad5b-7f51fb6225db" />
 
@@ -91,5 +91,29 @@ parseObject() 方法用于解析 Key和 Value，首先解析Key -> 两个双引�
 
 <img width="1042" alt="image" src="https://github.com/user-attachments/assets/3d2e3b9f-8c9e-4a3f-9dca-140d7d5c474f" />
 
-获取到 Key值后，会做一个判断，判断 Key是否等于 JSON.DEFAULT_TYPE_KEY (即 @type)，结果是相等，则使用 loadClass()方法去加载这个类，并将其加入缓存中并赋值给 clazz
+7、获取到 Key值后，会做一个判断，判断 Key是否等于 JSON.DEFAULT_TYPE_KEY (即 @type)，结果是相等，则使用 loadClass()方法去加载这个类，并将其加入缓存中并赋值给 clazz
+
+<img width="1020" alt="image" src="https://github.com/user-attachments/assets/f640fb07-0f12-4879-a3cf-ce3210741b9d" />
+
+8、接着要对 clazz类 即 @type的值进行反序列化，首先要先获取 反序列化器，跟进 this.config.getDeserializer()方法：
+
+<img width="1027" alt="image" src="https://github.com/user-attachments/assets/5e902bda-ab90-41d2-b25d-2d623677ea81" />
+
+首先先从缓存中去查找获取 User类 (即 @type, clazz)，这个缓存表为提前设置好的，如下所示：
+
+<img width="798" alt="image" src="https://github.com/user-attachments/assets/f46ba3c9-e276-4e42-9b41-e64e730e29b5" />
+
+但是 User类为我们自己定义的类，所以找不到，继续跟进代码
+
+9、跟进 this.getDeserializer()方法：
+
+<img width="1030" alt="image" src="https://github.com/user-attachments/assets/638ad0f6-1ea0-4a43-aa41-a61f1fcc25d7" />
+
+跟进代码，来到 this.createJavaBeanDeserializer()方法，跟进：
+
+<img width="1050" alt="image" src="https://github.com/user-attachments/assets/c36c67f9-5178-4901-b192-d2637c8faeb5" />
+
+该方法中首先创建了一个布尔变量 asEnable，asEnabke通常代表着一个动态创建、加载类的这样一个变量，这里默认值为 true：
+
+<img width="1029" alt="image" src="https://github.com/user-attachments/assets/1e2b5a01-29be-4fd1-aef4-5a4bf719e954" />
 
